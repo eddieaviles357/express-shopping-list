@@ -6,12 +6,12 @@ class Item {
         this.price = price || 5;
     }
 
-    static getItems() {
-        return items;
+    static async getItems() {
+        return await items;
     }
-    static setItems(item) {
+    static async setItems(item) {
         if(!item instanceof Item) throw TypeError('Not an Item type');
-        items.push(item);
+        await items.push(item);
     }
 }
 
