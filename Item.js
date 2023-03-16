@@ -4,7 +4,7 @@ const items = require('./fakeDB');
 class Item {
     constructor(name, price) {
         if( (name && price) && !(isNaN(+price)) ) {
-            this.name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+            this.name = name.toLowerCase();
             this.price = +parseFloat(price).toFixed(2);
         } else {
             throw new ExpressError('Please enter valid fields', 400);
