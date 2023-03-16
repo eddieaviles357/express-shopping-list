@@ -49,8 +49,18 @@ router.put('/:name', async(req, res, next) => {
         let item = await Item.updateItem(req.params['name'].toLowerCase(), name, price);
         res.json({updated: { name: item.name, price: item.price} });
     } catch (err) {
-        next(err)
+        next(err);
     }
-})
+});
+
+// DELTE /items/:name
+// delete an item in the items array
+router.delete('/:name', async(req, res, next) => {
+    try {
+        
+    } catch (err) {
+        next(err);
+    }
+});
 
 module.exports = router;
