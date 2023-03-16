@@ -1,14 +1,20 @@
+const ExpressError = require('./ExpressError');
 const items = require('./fakeDB');
 
 class Item {
     constructor(name, price) {
-        this.name = name || 'ball';
-        this.price = price || 5;
+        if( (name && price) && !(isNaN(+price)) ) {
+            this.name = name;
+            this.price = +parseFloat(price).toFixed(2);
+        } else {
+            throw new ExpressError('Please enter valid fields', 400);
+        }
     }
 
     static async getItems() {
         return await items;
     }
+    
     static async setItems(item) {
         if(!item instanceof Item) throw TypeError('Not an Item type');
         await items.push(item);
