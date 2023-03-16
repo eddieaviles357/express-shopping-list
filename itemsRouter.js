@@ -41,5 +41,13 @@ router.post('/', async(req, res, next) => {
 });
 
 // PATCH /items/:name
+// update an item in the items array
+router.put('/', async(req, res, next) => {
+    try {
+        
+    } catch (err) {
+        
+    }
+})
 
 module.exports = router;
