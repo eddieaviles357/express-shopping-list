@@ -28,6 +28,17 @@ class Item {
         // success push to item array
         await items.push(item);
     }
+
+    static seedItems() {
+            items.push(new Item('kite', 3))
+            items.push(new Item('bike', 5.13))
+            items.push(new Item('car', 35.13))
+            items.push(new Item('mountain', 95.13))
+            items.push(new Item('states', 13535.13))
+            items.push(new Item('country', 34834738475.13))
+    }
 }
+
+Item.seedItems()
 
 module.exports = Item;
