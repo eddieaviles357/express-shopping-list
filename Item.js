@@ -11,12 +11,13 @@ class Item {
         }
     }
 
-    static async getItem(name) {
-        return await items.find( ({itemName}) => itemName === name );
+    // get one item in list array
+    static async getItem(itemName) {
+        return await items.find( ({name}) => name === itemName )
     }
 
+    // get all list items
     static async getItems() {
-        // get all list items
         return await items;
     }
     
