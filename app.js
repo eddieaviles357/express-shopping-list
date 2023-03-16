@@ -19,8 +19,6 @@ app.use((req, res, next) => {
 // Handles error
 app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    console.log('hit Error')
-    console.log(err)
     return res.json({
         error: err.message
     });
