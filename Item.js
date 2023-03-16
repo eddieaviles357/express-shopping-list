@@ -16,6 +16,15 @@ class Item {
         return await items.find( ({name}) => name === itemName )
     }
 
+    // updates one item
+    static async updateItem(itemName, name, price) {
+        let item = await Item.getItem(itemName);
+        if(!item) throw new ExpressError('No item found to update', 400);
+        item.name = name;
+        item.price = +parseFloat(price).toFixed(2);
+        return item;
+    }
+
     // get all list items
     static async getItems() {
         return await items;
