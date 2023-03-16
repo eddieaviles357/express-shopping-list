@@ -13,7 +13,8 @@ class Item {
 
     // get one item in list array
     static async getItem(itemName) {
-        return await items.find( ({name}) => name === itemName )
+        let query = itemName.toLowerCase();
+        return await items.find( ({name}) => name === query )
     }
 
     // get all list items
