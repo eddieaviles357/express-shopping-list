@@ -42,12 +42,12 @@ router.post('/', async(req, res, next) => {
 
 // PATCH /items/:name
 // update an item in the items array
-router.put('/:name', async(req, res, next) => {
+router.patch('/:name', async(req, res, next) => {
     try {
         let {name, price} = req.body;
         if( !(name && price) ) throw new ExpressError('Empty fields not allowed', 400);
         let item = await Item.updateItem(req.params['name'].toLowerCase(), name, price);
-        res.json({updated: { name: item.name, price: item.price} });
+        return res.json({updated: { name: item.name, price: item.price} });
     } catch (err) {
         next(err);
     }
