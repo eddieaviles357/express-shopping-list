@@ -40,4 +40,6 @@ router.post('/', async(req, res, next) => {
     }
 });
 
+// PATCH /items/:name
+
 module.exports = router;
