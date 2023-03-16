@@ -57,7 +57,11 @@ router.put('/:name', async(req, res, next) => {
 // delete an item in the items array
 router.delete('/:name', async(req, res, next) => {
     try {
-        
+        // normalize item name and try to retrieve item in fake db
+        if(await Item.deleteItem(req.params['name'].toLowerCase()) === -1) {
+            throw new ExpressError('Item not found',400);
+        }
+        res.status(200).json({ message: "deleted"})
     } catch (err) {
         next(err);
     }
