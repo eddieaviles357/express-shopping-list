@@ -16,7 +16,11 @@ class Item {
     }
     
     static async setItems(item) {
+        // check if parameter is an instance of Item
         if(!item instanceof Item) throw TypeError('Not an Item type');
+        // checks if item is already in list
+        if( items.some( ({name}) => name === item.name ) ) throw new ExpressError('Already in list', 400);
+        // success push to item array
         await items.push(item);
     }
 }
