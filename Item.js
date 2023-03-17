@@ -52,6 +52,7 @@ class Item {
 
     // delete an item in the list array
     static async deleteItem(itemName) {
+        let item = items.find( ({name}) => name === itemName );
         if( !(items.find( ({name}) => name === itemName )) ) return -1;
         let idx = items.indexOf(items.find( ({name}) => name === itemName ));
         if(idx === -1) return -1;
@@ -61,18 +62,18 @@ class Item {
 
 
     // seed list array with some fake data
-    static async seedItems() {
-            await items.push(new Item('kite', 3))
-            await items.push(new Item('bike', 5.13))
-            await items.push(new Item('car', 35.13))
-            await items.push(new Item('mountain', 95.13))
-            await items.push(new Item('states', 13535.13))
-            await items.push(new Item('country', 34834738475.13))
-    };
+    // static async seedItems() {
+    //         await items.push(new Item('kite', 3))
+    //         await items.push(new Item('bike', 5.13))
+    //         await items.push(new Item('car', 35.13))
+    //         await items.push(new Item('mountain', 95.13))
+    //         await items.push(new Item('states', 13535.13))
+    //         await items.push(new Item('country', 34834738475.13))
+    // };
 };
 
 
 
-Item.seedItems();
+// Item.seedItems();
 
 module.exports = Item;
