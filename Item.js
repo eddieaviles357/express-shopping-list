@@ -62,18 +62,18 @@ class Item {
 
 
     // seed list array with some fake data
-    // static async seedItems() {
-    //         await items.push(new Item('kite', 3))
-    //         await items.push(new Item('bike', 5.13))
-    //         await items.push(new Item('car', 35.13))
-    //         await items.push(new Item('mountain', 95.13))
-    //         await items.push(new Item('states', 13535.13))
-    //         await items.push(new Item('country', 34834738475.13))
-    // };
+    static async seedItems() {
+            await items.push(new Item('kite', 3))
+            await items.push(new Item('bike', 5.13))
+            await items.push(new Item('car', 35.13))
+            await items.push(new Item('mountain', 95.13))
+            await items.push(new Item('states', 13535.13))
+            await items.push(new Item('country', 34834738475.13))
+    };
 };
 
 
 
-// Item.seedItems();
+Item.seedItems();
 
 module.exports = Item;
