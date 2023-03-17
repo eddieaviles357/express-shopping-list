@@ -1,3 +1,4 @@
+// jest --detectOpenHandles
 process.env.NODE_ENV = "test";
 const request = require('supertest');
 const app = require('../app');
@@ -6,7 +7,7 @@ const Item = require('../item');
 const items = require('../fakeDB');
 
 beforeEach(() => {
-    items.push(new Item('Kite', 3));
+    items.push(new Item('kite', 3));
 });
 
 afterEach(() => {
@@ -19,7 +20,7 @@ describe('GET /items routes', () => {
     let res = await request(app)
                     .get('/items');
     let body = res.body;
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toEqual(200);
     expect(body).toBeInstanceOf(Object);
     expect(body).toHaveProperty("items", [{ "name": "kite", "price": 3 }]);
   });
@@ -28,7 +29,7 @@ describe('GET /items routes', () => {
     let res = await request(app)
                     .get('/items/kite');
     let body = res.body;
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toEqual(200);
     expect(body).toBeInstanceOf(Object);
     expect(body).toHaveProperty("item", { "name": "kite", "price": 3 });
   });
@@ -37,7 +38,7 @@ describe('GET /items routes', () => {
     let res = await request(app)
                     .get('/items/error');
     let body = res.body;
-    expect(res.statusCode).toBe(200);
+    expect(res.statusCode).toEqual(200);
     expect(body).toBeInstanceOf(Object);
     expect(body).toHaveProperty("message", "Not found");
   });
@@ -52,6 +53,42 @@ describe('POST /items', () => {
                         .post('/items')
                         .send({"name": "bike", "price": 10});
         let body = res.body;
-        console.log(body);
+        expect(res.statusCode).toEqual(200);
+        expect(body).toBeInstanceOf(Object);
+        expect(body).toHaveProperty("added", { "name": "bike", "price": 10 });
     });
+
+    // test('POST /items already in database', async() => {
+    //     let res = await request(app)
+    //                     .post('/items')
+    //                     .send({"name": "kite", "price": 3});
+    //     let body = res.body;
+    //     expect(res.statusCode).toEqual(400);
+    //     expect(body).toBeInstanceOf(Object);
+    //     expect(body).toHaveProperty("error", "Already in list" );
+    // });
 });
+
+describe('PATCH /items/:name', () => {
+
+    test('PATCH /items/:name update item in the db ', async() => {
+        let res = await request(app)
+                    .patch('/items/kite')
+                    .send({"name": "bike", "price": 6});
+        let body = res.body;
+        expect(res.statusCode).toEqual(200);
+        expect(body).toBeInstanceOf(Object);
+        expect(body).toHaveProperty("updated", { "name": "bike", "price": 6 });
+    });
+
+    // test('PATCH /items/:name no item in db', async() => {
+    //     let res = await request(app)
+    //                     .patch('/items/car')
+    //                     .send({"name": "cat", "price": 2});
+    //     let body = res.body;
+    //     expect(res.statusCode).toEqual(400);
+    //     expect(body).toBeInstanceOf(Object);
+    //     expect(body).toHaveProperty("error", 'No item found to update');
+    // });
+});
+
